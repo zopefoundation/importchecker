@@ -1,0 +1,9 @@
+Changes
+=======
+
+1.0 (unreleased)
+----------------
+
+* Initial packaging
+
+* Make the importchecker work on python 2.5
