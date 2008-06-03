@@ -291,6 +291,9 @@ class ImportDatabase:
 
 
 def main(path=None):
+    cwd = os.getcwd()
+    lencwd = len(cwd)+1
+
     try:
         path = path or sys.argv[1]
     except IndexError:
@@ -302,7 +305,6 @@ def main(path=None):
         print "Unknown path:", path
         sys.exit(1)
 
-    l = len(path) + 1
     db = ImportDatabase(path)
     db.findModules()
     unused_imports = db.getUnusedImports()
@@ -310,7 +312,8 @@ def main(path=None):
     module_paths.sort()
     for path in module_paths:
         info = unused_imports[path]
-        path = path[l:]
+        if path.startswith(cwd):
+            path = path[lencwd:]
         if not info:
             continue
         line2names = {}
