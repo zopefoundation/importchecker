@@ -1,7 +1,7 @@
 Changes
 =======
 
-1.1 (unreleased)
+1.1 (2012-01-09)
 ----------------
 
 * Applied provided by wosc enabling running the import checker on

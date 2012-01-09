@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '1.1dev'
+version = '1.1'
 description = "Importchecker finds unused imports in Python modules."
 
 def read(*rnames):
