@@ -4,6 +4,9 @@ Changes
 1.1 (unreleased)
 ----------------
 
+* Applied provided by wosc enabling running the import checker on
+  individual python modules not just directories.
+
 * Report the absolute path for modules when needed, relative paths (relative
   to the current working directory, that is) when possible.
 

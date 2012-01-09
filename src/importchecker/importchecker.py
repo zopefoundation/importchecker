@@ -300,13 +300,16 @@ def main(path=None):
         print "No path supplied"
         sys.exit(1)
 
-    path = os.path.abspath(path)
-    if not os.path.isdir(path):
-        print "Unknown path:", path
-        sys.exit(1)
+    fullpath = os.path.abspath(path)
+    path = fullpath
+    if not os.path.isdir(fullpath):
+        path = os.path.dirname(fullpath)
 
     db = ImportDatabase(path)
-    db.findModules()
+    if os.path.isdir(fullpath):
+        db.findModules()
+    else:
+        db.addModule(Module(fullpath))
     unused_imports = db.getUnusedImports()
     module_paths = unused_imports.keys()
     module_paths.sort()

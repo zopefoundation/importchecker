@@ -22,9 +22,10 @@ The importchecker commandline utility can be installed using the
 
   $ sudo easy_install importchecker
 
-The command can then be invoked with::
+The command can then be invoked with either a directory or a Python file::
 
   $ importchecker /path/to/a/source/tree
+  $ importchecker /path/to/a/source/tree/module.py
 
 Buildout
 --------
