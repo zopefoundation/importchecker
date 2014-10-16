@@ -20,8 +20,9 @@ $Id$
 """
 
 import compiler
-import os, os.path
+import os
 import sys
+
 
 def _findDottedNamesHelper(node, result):
     more_node = node
@@ -124,7 +125,6 @@ class Module:
         mod = compiler.parseFile(path)
         self._path = path
         self._map = findImports(mod)
-        dottednames = {}
         self._dottednames = findDottedNames(mod)
 
     def getPath(self):
@@ -243,7 +243,7 @@ class ImportDatabase:
         """
         self_path = module.getPath()
         # do nothing if we already know about it
-        if self._modules.has_key(self_path):
+        if self._path in self._modules:
             return
 
         self._modules[self_path] = module
@@ -255,7 +255,7 @@ class ImportDatabase:
             path = self.resolveDottedModuleName(from_module_name, module)
             t = (path, name)
             modulepaths = names.get(t, {})
-            if not modulepaths.has_key(self_path):
+            if not self._path in modulepaths:
                 modulepaths[self_path] = 1
             names[t] = modulepaths
 
@@ -279,7 +279,7 @@ class ImportDatabase:
     def isNameImportedFrom(self, name, module):
         """Return true if name is imported from module by another module.
         """
-        return self._names.has_key((module.getPath(), name))
+        return (module.getPath(), name) in self._names
 
     def getModulesImportingNameFrom(self, name, module):
         """Return list of known modules that import name from module.
