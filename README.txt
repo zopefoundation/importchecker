@@ -49,6 +49,20 @@ the developed codebase::
 Known issues
 ------------
 
+* No Python-3 support yet.
+
+* Case like::
+
+    from foo import baz
+    baz().qux
+
+  and::
+
+    import foo.bar
+    foo.bar.qux = new_value
+
+  will be reported as false positives.
+
 * One source tree path argument at the time can be passed to the command
   line utility.
 
