@@ -18,7 +18,7 @@ grep-like and thus emacs-friendly.
 
 $Id$
 """
-
+from __future__ import print_function
 import compiler
 import os
 import sys
@@ -290,14 +290,14 @@ class ImportDatabase:
         return result
 
 
-def main(path=None):
+def main(path=None, stdout=None):
     cwd = os.getcwd()
-    lencwd = len(cwd)+1
+    lencwd = len(cwd) + 1
 
     try:
         path = path or sys.argv[1]
     except IndexError:
-        print "No path supplied"
+        print("No path supplied", file=stdout)
         sys.exit(1)
 
     fullpath = os.path.abspath(path)
@@ -328,4 +328,4 @@ def main(path=None):
         lines.sort()
         for line in lines:
             names = ', '.join(line2names[line])
-            print "%s:%s: %s" % (path, line, names)
+            print(u"{}:{}: {}".format(path, line, names), file=stdout)
