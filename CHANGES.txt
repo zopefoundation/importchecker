@@ -4,8 +4,11 @@ Changes
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+* Fix a bug in `ImportDatabase()`.
 
+* Cleanups.
+
+* Claim support for Python 2.7, drop claims for earlier versions.
 
 1.1 (2012-01-09)
 ----------------
