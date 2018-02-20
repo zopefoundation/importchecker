@@ -16,40 +16,32 @@
 This utility finds unused imports in Python modules.  Its output is
 grep-like and thus emacs-friendly.
 """
-from __future__ import print_function
-import compiler
+
+import ast
 import os
 import sys
 
 
 def _findDottedNamesHelper(node, result):
-    more_node = node
     name = node.__class__.__name__
-    if name == 'Getattr':
+    childs = ast.iter_child_nodes(node)
+    if name == 'Attribute':
         dotted = []
-        while name == 'Getattr':
-            dotted.append(node.attrname)
-            node = node.expr
+        while name == 'Attribute':
+            dotted.append(node.attr)
+            node = node.value
             name = node.__class__.__name__
         if name == 'Name':
-            dotted.append(node.name)
+            dotted.append(node.id)
             dotted.reverse()
             for i in range(1, len(dotted)):
                 result.append('.'.join(dotted[:i]))
             result.append('.'.join(dotted))
             return
     elif name == 'Name':
-        result.append(node.name)
+        result.append(node.id)
         return
-    elif name == 'AssAttr':
-        # Can be on an import as well.
-        # for instance
-        # from x import y
-        # y.k = v
-        expr = node.expr
-        result.append(getattr(expr, 'name', ''))
-        return
-    for child in more_node.getChildNodes():
+    for child in childs:
         _findDottedNamesHelper(child, result)
 
 
@@ -61,27 +53,28 @@ def findDottedNames(node):
     return result
 
 
-class ImportFinder:
-    """An instance of this class will be used to walk over a compiler AST
-    tree (a module). During that operation, the appropriate methods of
-    this visitor will be called
-    """
+class ImportFinder(ast.NodeVisitor):
 
     def __init__(self):
         self._map = {}
 
-    def visitFrom(self, stmt):
-        """Will be called for 'from foo import bar' statements
-        """
-        # XXX take first two items of statement list as in Python 2.5 this
-        # list contains more information items.
-        module_name, names = stmt.asList()[:2]
+    def getMap(self):
+        return self._map
+
+    def visit_ImportFrom(self, stmt):
+        # print(
+        #     'FROM', stmt.module,
+        #     [(i.name, i.asname) for i in stmt.names], stmt.level)
+
+        module_name = stmt.module
+        names = stmt.names
         if module_name == '__future__':
             # we don't care what's imported from the future
             return
         names_dict = {}
-        for orig_name, as_name in names:
+        for alias in names:
             # we don't care about from import *
+            orig_name, as_name = alias.name, alias.asname
             if orig_name == '*':
                 continue
             if as_name is None:
@@ -92,10 +85,14 @@ class ImportFinder:
         self._map.setdefault(module_name, {'names': names_dict,
                                            'lineno': stmt.lineno})
 
-    def visitImport(self, stmt):
-        """Will be called for 'import foo.bar' statements
-        """
-        for orig_name, as_name in stmt.names:
+        for child_node in ast.iter_child_nodes(stmt):
+            self.generic_visit(stmt)
+
+    def visit_Import(self, stmt):
+        # print('IMPORT', [(i.name, i.asname) for i in stmt.names])
+
+        for alias in stmt.names:
+            orig_name, as_name = alias.name, alias.asname
             if as_name is None:
                 name = orig_name
             else:
@@ -103,16 +100,16 @@ class ImportFinder:
             self._map.setdefault(orig_name, {'names': {name: orig_name},
                                              'lineno': stmt.lineno})
 
-    def getMap(self):
-        return self._map
+        for child_node in ast.iter_child_nodes(stmt):
+            self.generic_visit(stmt)
 
 
 def findImports(mod):
     """Find import statements in module and put the result in a mapping.
     """
-    visitor = ImportFinder()
-    compiler.walk(mod, visitor)
-    return visitor.getMap()
+    finder = ImportFinder()
+    finder.visit(mod)
+    return finder.getMap()
 
 
 class Module:
@@ -120,7 +117,8 @@ class Module:
     """
 
     def __init__(self, path):
-        mod = compiler.parseFile(path)
+        with open(path, 'rb') as source:
+            mod = ast.parse(source.read(), path)
         self._path = path
         self._map = findImports(mod)
         self._dottednames = findDottedNames(mod)
@@ -167,7 +165,7 @@ class ModuleFinder:
     def __init__(self):
         self._files = []
 
-    def visit(self, arg, dirname, names):
+    def visit(self, dirname, names):
         """This method will be called when we walk the filesystem
         tree. It looks for python modules and stored their filenames.
         """
@@ -185,7 +183,8 @@ def findModules(path):
     filenames in a sequence.
     """
     finder = ModuleFinder()
-    os.path.walk(path, finder.visit, ())
+    for (dirpath, dirnames, filenames) in os.walk(path):
+        finder.visit(dirpath, filenames)
     return finder.getModuleFilenames()
 
 
@@ -309,8 +308,7 @@ def main(path=None, stdout=None):
     else:
         db.addModule(Module(fullpath))
     unused_imports = db.getUnusedImports()
-    module_paths = unused_imports.keys()
-    module_paths.sort()
+    module_paths = sorted(unused_imports.keys())
     for path in module_paths:
         info = unused_imports[path]
         if path.startswith(cwd):
@@ -322,8 +320,7 @@ def main(path=None, stdout=None):
             names = line2names.get(line, [])
             names.append(name)
             line2names[line] = names
-        lines = line2names.keys()
-        lines.sort()
+        lines = sorted(line2names.keys())
         for line in lines:
             names = ', '.join(line2names[line])
             print(u"{}:{}: {}".format(path, line, names), file=stdout)
