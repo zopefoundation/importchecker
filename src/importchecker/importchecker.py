@@ -82,7 +82,7 @@ class ImportFinder(ast.NodeVisitor):
                                            'lineno': stmt.lineno})
 
         for child_node in ast.iter_child_nodes(stmt):
-            self.generic_visit(stmt)
+            self.generic_visit(child_node)
 
     def visit_Import(self, stmt):
         for alias in stmt.names:
@@ -95,7 +95,7 @@ class ImportFinder(ast.NodeVisitor):
                                              'lineno': stmt.lineno})
 
         for child_node in ast.iter_child_nodes(stmt):
-            self.generic_visit(stmt)
+            self.generic_visit(child_node)
 
 
 def findImports(mod):
