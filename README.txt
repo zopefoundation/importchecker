@@ -49,16 +49,7 @@ the developed codebase::
 Known issues
 ------------
 
-* Python-2 support will be dropped in the next major version.
-
-* No Python-3 support yet.
-
-* Cases like::
-
-    import foo.bar
-    foo.bar.qux = new_value
-
-  will be reported as false positives.
+* Python 2 support was dropped.
 
 * One source tree path argument at the time can be passed to the command
   line utility.
