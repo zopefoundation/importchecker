@@ -4,6 +4,8 @@ Changes
 1.2 (unreleased)
 ----------------
 
+* Start in test coverage.
+
 * Fix a bug in `ImportDatabase()`.
 
 * Cleanups.
