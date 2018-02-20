@@ -1,5 +1,6 @@
 import io
 import unittest
+import mock
 import pkg_resources
 
 from importchecker.importchecker import main
@@ -8,17 +9,13 @@ from importchecker.importchecker import main
 class TestImportChecker(unittest.TestCase):
 
     def test_no_path_supplied(self):
-        import sys
-
         output = io.StringIO()
-        orig = sys.argv[:]
-        sys.argv[:] = []
-        with self.assertRaises(SystemExit):
-            main(stdout=output)
-        self.assertEqual(
+        with mock.patch('sys.argv', []):
+            with self.assertRaises(SystemExit):
+                main(stdout=output)
+            self.assertEqual(
             'No path supplied\n',
-            output.getvalue())
-        sys.argv[:] = orig
+                output.getvalue())
 
     def test_abs_import(self):
         source = pkg_resources.resource_filename(
