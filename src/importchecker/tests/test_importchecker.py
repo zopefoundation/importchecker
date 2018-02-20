@@ -34,3 +34,12 @@ class TestImportChecker(unittest.TestCase):
         self.assertEqual(
             'src/importchecker/tests/fixture/fromimportas.py:1: stderr\n',
             output.getvalue())
+
+    def test_attr_assigment(self):
+        source = pkg_resources.resource_filename(
+            'importchecker.tests', 'fixture/attrassignment.py')
+        output = io.StringIO()
+        main(path=source, stdout=output)
+        self.assertEqual(
+            '',
+            output.getvalue())
