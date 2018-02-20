@@ -295,7 +295,7 @@ def main(path=None, stdout=None):
     try:
         path = path or sys.argv[1]
     except IndexError:
-        print("No path supplied", file=stdout)
+        print(u"No path supplied", file=stdout)
         sys.exit(1)
 
     fullpath = os.path.abspath(path)

@@ -7,6 +7,19 @@ from importchecker.importchecker import main
 
 class TestImportChecker(unittest.TestCase):
 
+    def test_no_path_supplied(self):
+        import sys
+
+        output = io.StringIO()
+        orig = sys.argv[:]
+        sys.argv[:] = []
+        with self.assertRaises(SystemExit):
+            main(stdout=output)
+        self.assertEqual(
+            'No path supplied\n',
+            output.getvalue())
+        sys.argv[:] = orig
+
     def test_abs_import(self):
         source = pkg_resources.resource_filename(
             'importchecker.tests', 'fixture/absimport.py')
