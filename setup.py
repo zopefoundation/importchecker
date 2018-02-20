@@ -3,7 +3,7 @@ import os
 from setuptools import setup, find_packages
 
 
-version = '2.0+md.1'
+version = '2.0+md.2.dev0'
 
 
 description = "Importchecker finds unused imports in Python modules."
