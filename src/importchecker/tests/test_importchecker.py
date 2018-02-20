@@ -36,6 +36,9 @@ class TestImportChecker(unittest.TestCase):
             output.getvalue())
 
     def test_attr_assigment(self):
+        """In the Python 2 `compiler`-based implementation there was a
+        specific codepath for attribute assignment nodes.
+        """
         source = pkg_resources.resource_filename(
             'importchecker.tests', 'fixture/attrassignment.py')
         output = io.StringIO()
