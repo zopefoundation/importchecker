@@ -53,6 +53,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=['setuptools'],
+    tests_require=['mock'],
+    extras_require={'tests': ['mock']},
     test_suite='importchecker.tests',
     entry_points={
         'console_scripts': ['importchecker=importchecker.importchecker:main'],
