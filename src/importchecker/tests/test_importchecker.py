@@ -46,3 +46,18 @@ class TestImportChecker(unittest.TestCase):
         self.assertEqual(
             '',
             output.getvalue())
+
+
+class TestImportCheckerOnDirectory(unittest.TestCase):
+
+    def test_importchecker(self):
+        source = pkg_resources.resource_filename(
+            'importchecker.tests', 'fixture')
+        output = io.StringIO()
+        main(path=source, stdout=output)
+        self.assertEqual(
+            'src/importchecker/tests/fixture/absimport.py:1: sys\n'
+            'src/importchecker/tests/fixture/absimport.py:2: sys.stderr\n'
+            'src/importchecker/tests/fixture/fromimport.py:1: stderr\n'
+            'src/importchecker/tests/fixture/fromimportas.py:1: stderr\n',
+            output.getvalue())
