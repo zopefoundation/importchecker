@@ -4,6 +4,8 @@ Changes
 1.2 (unreleased)
 ----------------
 
+* NOTE: this is the last version to officially support Python 2.
+
 * Start in test coverage.
 
 * Fix a bug in `ImportDatabase()`.
