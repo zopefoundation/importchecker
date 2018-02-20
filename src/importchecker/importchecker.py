@@ -243,7 +243,7 @@ class ImportDatabase:
         """
         self_path = module.getPath()
         # do nothing if we already know about it
-        if self._path in self._modules:
+        if self_path in self._modules:
             return
 
         self._modules[self_path] = module
@@ -255,7 +255,7 @@ class ImportDatabase:
             path = self.resolveDottedModuleName(from_module_name, module)
             t = (path, name)
             modulepaths = names.get(t, {})
-            if not self._path in modulepaths:
+            if self_path not in modulepaths:
                 modulepaths[self_path] = 1
             names[t] = modulepaths
 

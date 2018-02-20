@@ -1,0 +1,5 @@
+.installed.cfg
+*.pyc
+bin
+develop-eggs
+src/importchecker.egg-info
