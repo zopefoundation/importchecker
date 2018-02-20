@@ -239,7 +239,7 @@ class ImportDatabase:
     def addModule(self, module):
         """Add information about a module to the database. A module in
         this case is not a python module object, but an instance of
-        the above defined Module class.w
+        the above defined Module class.
         """
         self_path = module.getPath()
         # do nothing if we already know about it
