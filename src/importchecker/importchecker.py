@@ -62,10 +62,6 @@ class ImportFinder(ast.NodeVisitor):
         return self._map
 
     def visit_ImportFrom(self, stmt):
-        # print(
-        #     'FROM', stmt.module,
-        #     [(i.name, i.asname) for i in stmt.names], stmt.level)
-
         module_name = stmt.module
         names = stmt.names
         if module_name == '__future__':
@@ -89,8 +85,6 @@ class ImportFinder(ast.NodeVisitor):
             self.generic_visit(stmt)
 
     def visit_Import(self, stmt):
-        # print('IMPORT', [(i.name, i.asname) for i in stmt.names])
-
         for alias in stmt.names:
             orig_name, as_name = alias.name, alias.asname
             if as_name is None:
