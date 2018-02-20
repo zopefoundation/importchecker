@@ -17,6 +17,18 @@ class TestImportChecker(unittest.TestCase):
             'src/importchecker/tests/fixture/absimport.py:2: sys.stderr\n',
             output.getvalue())
 
+    def test_abs_import_in_function(self):
+        source = pkg_resources.resource_filename(
+            'importchecker.tests', 'fixture/absimportinfunction.py')
+        output = io.StringIO()
+        main(path=source, stdout=output)
+        self.assertEqual(
+            'src/importchecker/tests/fixture/absimportinfunction.py:2: sys\n'
+            'src/importchecker/tests/fixture/absimportinfunction.py:3: sys.stderr\n'
+            'src/importchecker/tests/fixture/absimportinfunction.py:9: datetime\n'
+            'src/importchecker/tests/fixture/absimportinfunction.py:10: datetime.datetime\n',
+            output.getvalue())
+
     def test_from_import(self):
         source = pkg_resources.resource_filename(
             'importchecker.tests', 'fixture/fromimport.py')
@@ -83,6 +95,10 @@ class TestImportCheckerOnDirectory(unittest.TestCase):
             'src/importchecker/tests/fixture/absimport.py:1: sys\n'
             'src/importchecker/tests/fixture/absimport.py:2: sys.stderr\n'
             'src/importchecker/tests/fixture/absimportattrassignment.py:1: sys.stderr\n'
+            'src/importchecker/tests/fixture/absimportinfunction.py:2: sys\n'
+            'src/importchecker/tests/fixture/absimportinfunction.py:3: sys.stderr\n'
+            'src/importchecker/tests/fixture/absimportinfunction.py:9: datetime\n'
+            'src/importchecker/tests/fixture/absimportinfunction.py:10: datetime.datetime\n'
             'src/importchecker/tests/fixture/fromimport.py:1: stderr\n'
             'src/importchecker/tests/fixture/fromimportas.py:1: stderr\n',
             output.getvalue())
