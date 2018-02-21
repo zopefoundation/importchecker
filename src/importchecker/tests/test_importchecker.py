@@ -1,9 +1,15 @@
 import io
+import sys
 import unittest
-import mock
 import pkg_resources
 
 from importchecker.importchecker import main
+
+
+if sys.version_info.major == 2:
+    import mock
+else:
+    from unittest import mock
 
 
 FAKECWD = pkg_resources.resource_filename('importchecker', 'tests')

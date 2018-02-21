@@ -1,20 +1,12 @@
 Changes
 =======
 
-2.0+md.2 (unreleased)
----------------------
+2.0 (unreleased)
+----------------
 
-- Nothing changed yet.
-
-
-2.0+md.1 (2018-02-20)
----------------------
-
-* NOTE: this is the last version to officially support Python 2.
-
-* Start in test coverage.
-
-* Claim support for Python 2.7, drop claims for earlier versions.
+* The tests indicate `importchecker` still works for Python 2, but since
+  the AST structures can differ between Python 2 and Python 3, no support is
+  formally claimed.
 
 1.1 (2012-01-09)
 ----------------

@@ -1,4 +1,5 @@
 import os
+import sys
 
 from setuptools import setup, find_packages
 
@@ -7,7 +8,10 @@ version = '2.0+md.2.dev0'
 
 
 description = "Importchecker finds unused imports in Python modules."
-test_requirements = ['mock', 'zope.testrunner']
+test_requirements = ['zope.testrunner']
+
+if sys.version_info.major == 2:
+    test_requirements.append('mock')
 
 
 def read(*rnames):
