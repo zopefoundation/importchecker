@@ -5,8 +5,6 @@ from setuptools import setup, find_packages
 
 
 version = '2.0.dev0'
-
-
 description = "Importchecker finds unused imports in Python modules."
 test_requirements = ['zope.testrunner']
 
@@ -53,7 +51,7 @@ setup(
         ],
     keywords='',
     author='Jan-Wijbrand Kolman',
-    author_email='jw@n--tree.net',
+    author_email='janwijbrand@gmail.com',
     url='http://pypi.python.org/pypi/importchecker',
     license='ZPL 2.1',
     package_dir={'': 'src'},
