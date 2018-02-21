@@ -281,8 +281,8 @@ class ImportDatabase:
         return result
 
 
-def main(path=None, stdout=None):
-    cwd = os.getcwd()
+def main(path=None, cwd=None, stdout=None):
+    cwd = cwd or os.getcwd()
     lencwd = len(cwd) + 1
 
     try:
