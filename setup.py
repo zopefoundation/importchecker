@@ -44,7 +44,7 @@ setup(
         ],
     keywords='',
     author='Jan-Wijbrand Kolman',
-    author_email='jw@n--tree.net',
+    author_email='janwijbrand@gmail.com',
     url='http://pypi.python.org/pypi/importchecker',
     license='ZPL 2.1',
     package_dir={'': 'src'},
