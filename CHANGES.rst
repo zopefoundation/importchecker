@@ -4,8 +4,9 @@ Changes
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+* Start on test coverage.
 
+* Claim support for Python 2.7, drop claims for earlier versions.
 
 1.1 (2012-01-09)
 ----------------

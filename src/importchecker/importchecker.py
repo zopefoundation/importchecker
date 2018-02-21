@@ -11,14 +11,12 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Import checker
+"""Importchecker
 
 This utility finds unused imports in Python modules.  Its output is
 grep-like and thus emacs-friendly.
-
-$Id$
 """
-
+from __future__ import print_function
 import compiler
 import os
 import sys
@@ -239,11 +237,11 @@ class ImportDatabase:
     def addModule(self, module):
         """Add information about a module to the database. A module in
         this case is not a python module object, but an instance of
-        the above defined Module class.w
+        the above defined Module class.
         """
         self_path = module.getPath()
         # do nothing if we already know about it
-        if self._path in self._modules:
+        if self_path in self._modules:
             return
 
         self._modules[self_path] = module
@@ -255,7 +253,7 @@ class ImportDatabase:
             path = self.resolveDottedModuleName(from_module_name, module)
             t = (path, name)
             modulepaths = names.get(t, {})
-            if not self._path in modulepaths:
+            if self_path not in modulepaths:
                 modulepaths[self_path] = 1
             names[t] = modulepaths
 
@@ -290,14 +288,14 @@ class ImportDatabase:
         return result
 
 
-def main(path=None):
-    cwd = os.getcwd()
-    lencwd = len(cwd)+1
+def main(path=None, cwd=None, stdout=None):
+    cwd = cwd or os.getcwd()
+    lencwd = len(cwd) + 1
 
     try:
         path = path or sys.argv[1]
     except IndexError:
-        print "No path supplied"
+        print(u"No path supplied", file=stdout)
         sys.exit(1)
 
     fullpath = os.path.abspath(path)
@@ -328,4 +326,4 @@ def main(path=None):
         lines.sort()
         for line in lines:
             names = ', '.join(line2names[line])
-            print "%s:%s: %s" % (path, line, names)
+            print(u"{}:{}: {}".format(path, line, names), file=stdout)

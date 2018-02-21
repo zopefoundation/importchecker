@@ -1,0 +1,4 @@
+include *.rst
+include *.py
+include buildout.cfg
+recursive-include src *.py

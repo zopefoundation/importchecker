@@ -49,14 +49,11 @@ the developed codebase::
 Known issues
 ------------
 
+* Python-2 support will be dropped in the next major version.
+
 * No Python-3 support yet.
 
-* Case like::
-
-    from foo import baz
-    baz().qux
-
-  and::
+* Cases like::
 
     import foo.bar
     foo.bar.qux = new_value
