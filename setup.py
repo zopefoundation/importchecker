@@ -3,7 +3,7 @@ import os
 from setuptools import setup, find_packages
 
 
-version = '1.2'
+version = '1.3.dev0'
 description = "Importchecker finds unused imports in Python modules."
 test_requirements = ['mock', 'zope.testrunner']
 
