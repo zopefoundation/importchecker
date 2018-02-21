@@ -1,0 +1,12 @@
+language: python
+sudo: false
+python:
+    - 2.7
+install:
+    - pip install -U pip setuptools
+    - pip install -U -e .[test]
+script:
+    - python -m zope.testrunner --test-path=src {posargs:-vc}
+notifications:
+    email: false
+cache: pip

@@ -1,5 +1,6 @@
 .eggs
 .installed.cfg
+.tox
 *.pyc
 bin
 develop-eggs

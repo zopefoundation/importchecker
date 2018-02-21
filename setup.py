@@ -4,9 +4,8 @@ from setuptools import setup, find_packages
 
 
 version = '1.2dev'
-
-
 description = "Importchecker finds unused imports in Python modules."
+test_requirements = ['mock', 'zope.testrunner']
 
 
 def read(*rnames):
@@ -53,9 +52,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=['setuptools'],
-    tests_require=['mock'],
-    extras_require={'tests': ['mock']},
-    test_suite='importchecker.tests',
+    tests_require=test_requirements,
+    extras_require={'test': test_requirements},
     entry_points={
         'console_scripts': ['importchecker=importchecker.importchecker:main'],
         },
