@@ -4,9 +4,7 @@ Changes
 1.2 (unreleased)
 ----------------
 
-* NOTE: this is the last version to officially support Python 2.
-
-* Start in test coverage.
+* Start on test coverage.
 
 * Claim support for Python 2.7, drop claims for earlier versions.
 
