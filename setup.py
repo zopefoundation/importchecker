@@ -1,11 +1,17 @@
 import os
+import sys
 
 from setuptools import setup, find_packages
 
 
-version = '1.2dev'
+version = '2.0+md.2.dev0'
+
+
 description = "Importchecker finds unused imports in Python modules."
-test_requirements = ['mock', 'zope.testrunner']
+test_requirements = ['zope.testrunner']
+
+if sys.version_info.major == 2:
+    test_requirements.append('mock')
 
 
 def read(*rnames):
@@ -39,8 +45,11 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         ],
     keywords='',
     author='Jan-Wijbrand Kolman',

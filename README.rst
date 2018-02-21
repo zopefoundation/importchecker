@@ -49,16 +49,9 @@ the developed codebase::
 Known issues
 ------------
 
-* Python-2 support will be dropped in the next major version.
-
-* No Python-3 support yet.
-
-* Cases like::
-
-    import foo.bar
-    foo.bar.qux = new_value
-
-  will be reported as false positives.
+* Official Python 2 support was dropped. Informal tests indicate
+  `importchecker` still works for Python 2, but since the AST structures
+  can differ between Python 2 and Python 3, no support is formally claimed.
 
 * One source tree path argument at the time can be passed to the command
   line utility.

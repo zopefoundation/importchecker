@@ -1,7 +1,14 @@
 Changes
 =======
 
-1.2 (unreleased)
+2.0 (unreleased)
+----------------
+
+* The tests indicate `importchecker` still works for Python 2, but since
+  the AST structures can differ between Python 2 and Python 3, no support is
+  formally claimed.
+
+1.2 (2018-02-21)
 ----------------
 
 * Start on test coverage.
