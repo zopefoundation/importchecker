@@ -21,11 +21,11 @@ def read(*rnames):
 
 
 long_description = (
-    read('README.txt')
+    read('README.rst')
     + '\n' +
-    read('CHANGES.txt')
+    read('CHANGES.rst')
     + '\n' +
-    read('CREDITS.txt')
+    read('CREDITS.rst')
     + '\n' +
     'Download\n'
     '========\n'

@@ -8,6 +8,13 @@ Changes
   the AST structures can differ between Python 2 and Python 3, no support is
   formally claimed.
 
+1.2 (2018-02-21)
+----------------
+
+* Start on test coverage.
+
+* Claim support for Python 2.7, drop claims for earlier versions.
+
 1.1 (2012-01-09)
 ----------------
 
