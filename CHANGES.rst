@@ -1,7 +1,7 @@
 Changes
 =======
 
-1.2 (unreleased)
+1.2 (2018-02-21)
 ----------------
 
 * Start on test coverage.
