@@ -6,7 +6,7 @@ install:
     - pip install -U pip setuptools
     - pip install -U -e .[test]
 script:
-    - python -m zope.testrunner --test-path=src {posargs:-vc}
+    - zope-testrunner --test-path=src {posargs:-vc}
 notifications:
     email: false
 cache: pip
