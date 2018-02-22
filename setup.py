@@ -1,11 +1,21 @@
 import os
+import sys
 
 from setuptools import setup, find_packages
 
 
-version = '1.3.dev0'
+version = '2.0.dev0'
 description = "Importchecker finds unused imports in Python modules."
-test_requirements = ['mock', 'zope.testrunner']
+test_requirements = [
+    'zope.testrunner'
+    ]
+
+if sys.version_info.major == 2:
+    # If setup.py is not actually executed (in wheel situations, where pip
+    # will build a wheel and caches it during installation), this dependency
+    # is not added. Since it is a testing only dependency I think it is ok for
+    # now.
+    test_requirements.append('mock')
 
 
 def read(*rnames):
@@ -39,8 +49,10 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         ],
     keywords='',
     author='Jan-Wijbrand Kolman',
