@@ -1,7 +1,7 @@
 Changes
 =======
 
-2.0 (unreleased)
+2.0 (2018-02-22)
 ----------------
 
 * The tests indicate `importchecker` still works for Python 2, but since

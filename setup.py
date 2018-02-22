@@ -4,7 +4,7 @@ import sys
 from setuptools import setup, find_packages
 
 
-version = '2.0.dev0'
+version = '2.0'
 description = "Importchecker finds unused imports in Python modules."
 test_requirements = [
     'zope.testrunner'
