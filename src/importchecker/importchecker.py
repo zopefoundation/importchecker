@@ -24,7 +24,7 @@ import sys
 
 def _findDottedNamesHelper(node, result):
     name = node.__class__.__name__
-    childs = ast.iter_child_nodes(node)
+    children = ast.iter_child_nodes(node)
     if name == 'Attribute':
         dotted = []
         while name == 'Attribute':
@@ -41,7 +41,7 @@ def _findDottedNamesHelper(node, result):
     elif name == 'Name':
         result.append(node.id)
         return
-    for child in childs:
+    for child in children:
         _findDottedNamesHelper(child, result)
 
 
