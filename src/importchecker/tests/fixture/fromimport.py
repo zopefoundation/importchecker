@@ -1,1 +1,1 @@
-from sys import stderr  # noqa: F401 imported but unused
+from sys import stderr
