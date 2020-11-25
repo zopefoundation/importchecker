@@ -8,7 +8,7 @@ version = '2.1.dev0'
 description = "Importchecker finds unused imports in Python modules."
 test_requirements = [
     'zope.testrunner'
-    ]
+]
 
 if sys.version_info.major == 2:
     # If setup.py is not actually executed (in wheel situations, where pip
@@ -33,7 +33,7 @@ long_description = (
     + '\n' +
     'Download\n'
     '========\n'
-    )
+)
 
 
 setup(
@@ -50,10 +50,13 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3.6',
-        ],
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: Implementation :: CPython'
+    ],
     keywords='',
     author='Jan-Wijbrand Kolman',
     author_email='janwijbrand@gmail.com',
@@ -68,5 +71,5 @@ setup(
     extras_require={'test': test_requirements},
     entry_points={
         'console_scripts': ['importchecker=importchecker.importchecker:main'],
-        },
-    )
+    },
+)
