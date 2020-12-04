@@ -1,0 +1,19 @@
+# Generated from:
+# https://github.com/zopefoundation/meta/tree/master/config/pure-python
+[meta]
+template = "pure-python"
+commit-id = "fec280115a76abf60ba751e74752dc89b9694951"
+
+[python]
+with-pypy = false
+with-legacy-python = false
+with-docs = false
+with-sphinx-doctests = false
+
+[coverage]
+fail-under = 90
+
+[flake8]
+additional-config = [
+    "exclude = src/importchecker/tests/fixture",
+    ]
