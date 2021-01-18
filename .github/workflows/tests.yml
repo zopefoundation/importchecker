@@ -34,8 +34,9 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('setup.*', 'tox.ini') }}
+        key: ${{ runner.os }}-pip-${{ matrix.config[0] }}-${{ hashFiles('setup.*', 'tox.ini') }}
         restore-keys: |
+          ${{ runner.os }}-pip-${{ matrix.config[0] }}-
           ${{ runner.os }}-pip-
     - name: Install dependencies
       run: |
@@ -47,6 +48,6 @@ jobs:
       if: matrix.config[1] == 'coverage'
       run: |
         pip install coveralls coverage-python-version
-        coveralls
+        coveralls --service=github
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
