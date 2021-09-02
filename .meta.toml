@@ -2,14 +2,14 @@
 # https://github.com/zopefoundation/meta/tree/master/config/pure-python
 [meta]
 template = "pure-python"
-commit-id = "13207dce4ea1a51f579fedbf1b41b30fb60d4216"
+commit-id = "d3627ba9bcb25d0c7cb09b96d695040a20e0ab2b"
 
 [python]
 with-pypy = false
 with-legacy-python = false
-with-docs = false
 with-sphinx-doctests = false
-with-appveyor = false
+with-windows = false
+with-future-python = false
 
 [coverage]
 fail-under = 90
@@ -18,3 +18,6 @@ fail-under = 90
 additional-config = [
     "exclude = src/importchecker/tests/fixture",
     ]
+
+[tox]
+use-flake8 = true
