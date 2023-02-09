@@ -1,5 +1,4 @@
 import os
-import sys
 
 from setuptools import find_packages
 from setuptools import setup
@@ -11,17 +10,10 @@ test_requirements = [
     'zope.testrunner'
 ]
 
-if sys.version_info.major == 2:
-    # If setup.py is not actually executed (in wheel situations, where pip
-    # will build a wheel and caches it during installation), this dependency
-    # is not added. Since it is a testing only dependency I think it is ok for
-    # now.
-    test_requirements.append('mock')
-
 
 def read(*rnames):
     filename = os.path.join(os.path.dirname(__file__), *rnames)
-    with open(filename, 'r') as txt:
+    with open(filename) as txt:
         return txt.read()
 
 
@@ -60,13 +52,14 @@ setup(
     ],
     keywords='',
     author='Jan-Wijbrand Kolman',
-    author_email='janwijbrand@gmail.com',
-    url='http://pypi.python.org/pypi/importchecker',
+    author_email='zope-dev@zope.dev',
+    url='https://github.com/zopefoundation/importchecker',
     license='ZPL 2.1',
     package_dir={'': 'src'},
     packages=find_packages('src'),
     include_package_data=True,
     zip_safe=False,
+    python_requires='>=3.7',
     install_requires=['setuptools'],
     tests_require=test_requirements,
     extras_require={'test': test_requirements},

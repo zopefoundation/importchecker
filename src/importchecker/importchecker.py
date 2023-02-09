@@ -16,7 +16,6 @@
 This utility finds unused imports in Python modules.  Its output is
 grep-like and thus emacs-friendly.
 """
-from __future__ import print_function
 
 import ast
 import os
@@ -289,7 +288,7 @@ def main(path=None, cwd=None, stdout=None):
     try:
         path = path or sys.argv[1]
     except IndexError:
-        print(u"No path supplied", file=stdout)
+        print("No path supplied", file=stdout)
         sys.exit(1)
 
     fullpath = os.path.abspath(path)
@@ -318,4 +317,4 @@ def main(path=None, cwd=None, stdout=None):
         lines = sorted(line2names.keys())
         for line in lines:
             names = ', '.join(line2names[line])
-            print(u"{}:{}: {}".format(path, line, names), file=stdout)
+            print(f"{path}:{line}: {names}", file=stdout)
