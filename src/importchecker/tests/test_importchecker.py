@@ -1,6 +1,7 @@
 import io
 import sys
 import unittest
+
 import pkg_resources
 
 from importchecker.importchecker import main

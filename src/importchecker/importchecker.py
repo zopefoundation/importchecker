@@ -17,6 +17,7 @@ This utility finds unused imports in Python modules.  Its output is
 grep-like and thus emacs-friendly.
 """
 from __future__ import print_function
+
 import ast
 import os
 import sys
