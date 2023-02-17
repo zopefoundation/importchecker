@@ -3,7 +3,7 @@ def foo():
     import sys.stderr
 
 
-class Bar(object):
+class Bar:
 
     def __init__(self):
         import datetime

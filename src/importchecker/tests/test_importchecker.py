@@ -1,15 +1,10 @@
 import io
-import sys
 import unittest
+from unittest import mock
+
 import pkg_resources
 
 from importchecker.importchecker import main
-
-
-if sys.version_info.major == 2:
-    import mock
-else:
-    from unittest import mock
 
 
 FAKECWD = pkg_resources.resource_filename('importchecker', 'tests')
@@ -67,9 +62,7 @@ class TestImportChecker(unittest.TestCase):
             output.getvalue())
 
     def test_attr_assigment(self):
-        """In the Python 2 `compiler`-based implementation there was a
-        specific codepath for attribute assignment nodes.
-        """
+        """Check for attribute assignment nodes."""
         source = pkg_resources.resource_filename(
             'importchecker.tests', 'fixture/attrassignment.py')
         output = io.StringIO()
