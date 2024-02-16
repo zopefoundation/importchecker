@@ -4,7 +4,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = '3.0.dev0'
+version = '3.0'
 description = "Importchecker finds unused imports in Python modules."
 test_requirements = [
     'zope.testrunner'
