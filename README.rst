@@ -4,12 +4,12 @@ Importchecker
 What is importchecker?
 ----------------------
 
-Importchecker is a commandline utility to find unused imports in Python
+Importchecker is a command line utility to find unused imports in Python
 modules.
 
 Its output is "grep-like" (and thus "emacs-friendly"), reporting both the
 module's filenames and line numbers where names are imported that are not
-acually used in the module.
+actually used in the module.
 
 Importchecker will not modify any of the source files. Whether the import
 needs to be removed is left to the judgement of the developer.
@@ -17,10 +17,10 @@ needs to be removed is left to the judgement of the developer.
 Installation
 ------------
 
-The importchecker commandline utility can be installed using the
-``easy_install`` command::
+The importchecker command line utility can be installed using the
+``pip``::
 
-  $ sudo easy_install importchecker
+  $ pip install importchecker
 
 The command can then be invoked with either a directory or a Python file::
 
@@ -44,14 +44,10 @@ the developed codebase::
   eggs = importchecker
   arguments = "${buildout:directory}/src"
 
-.. _`zc.buildout`: http://pypi.python.org/pypi/zc.buildout
+.. _`zc.buildout`: https://pypi.org/project/zc.buildout/
 
 Known issues
 ------------
-
-* Official Python 2 support was dropped. Informal tests indicate
-  `importchecker` still works for Python 2, but since the AST structures
-  can differ between Python 2 and Python 3, no support is formally claimed.
 
 * One source tree path argument at the time can be passed to the command
   line utility.
